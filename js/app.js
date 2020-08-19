@@ -44,25 +44,25 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 
 // select the btn-roll class element and adding event listener to the click event
 document.querySelector('.btn-hold').addEventListener('click', function () {
-    // 1. add current score to global score
-    scores[activePlayer] += roundScore;
+    if (gamePlaying) {
+        // 1. add current score to global score
+        scores[activePlayer] += roundScore;
 
-    // 2. update UI
-    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
-  
-     //3. check if player won the game
-    if (scores[activePlayer] >= 20) {
-        gamePlaying = false;
-        document.querySelector('#name-' + activePlayer).textContent = 'Winner!';         // print Winner! instead of Player#
-        document.querySelector('.dice').style.display = 'none'; // remove the dice when player wins
-        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');    // add css class winner
-        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');  // remove css class active
- 
-    } else {
-        // next player
-        nextPlayer();
+        // 2. update UI
+        document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+
+        //3. check if player won the game
+        if (scores[activePlayer] >= 100) {
+            document.querySelector('#name-' + activePlayer).textContent = 'Winner!';         // print Winner! instead of Player#
+            document.querySelector('.dice').style.display = 'none'; // remove the dice when player wins
+            document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');    // add css class winner
+            document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');  // remove css class active
+            gamePlaying = false;
+        } else {
+            // next player
+            nextPlayer();
+        }
     }
-
 });
 
 function nextPlayer() {
@@ -112,5 +112,3 @@ function init() {
 
 }
 
-// document.querySelector('#current-' + activePlayer).textContent = dice;
-// document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>';
