@@ -86,7 +86,7 @@ function nextPlayer() {
 // New game button using the init function created below
 document.querySelector('.btn-new').addEventListener('click', init);
      
-
+// start of game preset and new game resets
 function init() {
     scores = [0, 0];
     roundScore = 0;
